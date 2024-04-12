@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="pt-120 d-flex align-items-center">
+    <div class="container">
+        <div class="banner">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-2 order-md-1">
+                    <div class="banner-slide-text">
+                        <p class="category"><a href="#">Whisper AI</a></p>
+                        <h1>Your Thoughts, Your Voice, Your Anonymity.</h1>
+                        <p class="desc">Welcome to Whisper AI, the sanctuary for your untold stories and unspoken
+                            words. With our platform, you can share your deepest thoughts and boldest ideas without
+                            revealing your identity. Whether it's personal reflections, creative musings, or
+                            political opinions, Whisper AI provides a <mark>secure
+                                space for
+                                you to express
+                                yourself
+                                freely.</mark>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 order-1 order-md-2 img-index-container">
+                    <img src="{% static 'home/images/anonymous.jpg' %}" alt="hello" class="img-fluid index-hero-image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--! End of Hero Comp -->
+
+
+<!--! Trending Posts-->
+<section class="pt-120 pb-10">
+    <div class="container">
+
+        <div class="section-title text-center">
+            <h2>Latest Post</h2>
+        </div>
+
+        <div class="row">
+            {% for onepost in posts %}
+            <div class="col-lg-6 order-lg-1">
+                <!-- Post 1 -->
+
+                <div class="post-default post-has-no-thumb">
+                    <div class="post-data">
+                        <div class="cats"><a>Created at: {{ onepost.created_at }}</a></div>
+                        <div class="title">
+                            <h2><a href="{% url 'specificpost' onepost.post_id %}">{{ onepost.title }}</a></h2>
+                        </div>
+                        <ul class="nav meta align-items-center">
+                            <li class="meta-author">
+                                <img src="{{ onepost.post_image.url }}" alt="" class="img-fluid">
+                                <a>{{ onepost.user_id.username }}</a>
+                            </li>
+                            <li class="meta-date"><a>2 Feb 2019</a></li>
+                            <li class="meta-comments"><a><i class="fa fa-comment"></i> 2</a></li>
+                        </ul>
+                        <div class="desc">
+                            <p>
+                                {{ onepost.content|truncatechars:100 }}...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- End of Trending Posts-->
+
+
+
+<section class="pt-120 pb-10 video-post">
+    <div class="container">
+
+        <div class="section-title text-center">
+            <h2>Video Post</h2>
+        </div>
+
+        <div class="row">
+            {% for post_vid in posts_with_videos %}
+            <div class="col-md-6">
+                <!-- Post -->
+                <div class="post-default post-has-video">
+                    <div class="post-thumb">
+                        <a href="{% url 'specificpost' post_vid.post_id %}">
+                            <div data-bg-img="{{ post_vid.post_image.url }}"></div>
+                        </a>
+                    </div>
+                    <div class="post-data">
+                        <!-- Category -->
+                        <div class="cats"><a>Created at: {{ post_vid.created_at }}</a></div>
+                        <!-- Title -->
+                        <div class="title">
+                            <h2><a href="{% url 'specificpost' post_vid.post_id %}">{{ post_vid.title }}</a></h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Post -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<!-- post with sidebar -->
+<div class="container pt-40 pb-90">
+    <div class="row">
+
+
+
+        <div class="col-lg-8">
+            <!--! Popular Post -->
+            <section class="popular-post pb-10">
+                <div class="section-title">
+                    <h2>Popular Posts</h2>
+                </div>
+
+                <div class="post-blog-list">
+                    <!-- Post 1 -->
+                    {% for mst_like in top_liked_posts %}
+                    <div class="post-default post-has-right-thumb">
+                        <div class="d-flex flex-wrap">
+                            <div class="post-thumb align-self-stretch order-md-2">
+                                <a href="{% url 'specificpost' mst_like.post_id %}">
+                                    <div data-bg-img="{{ mst_like.post_image.url }}"></div>
+                                </a>
+                            </div>
+                            <div class="post-data order-md-1">
+                                <!-- Category -->
+                                <div class="cats"><a>Created at: {{ mst_like.created_at }}</a></div>
+                                <!-- Title -->
+                                <div class="title">
+                                    <h2><a href="{% url 'specificpost' mst_like.post_id %}">{{ mst_like.title }}</a>
+                                    </h2>
+                                </div>
+                                <!-- Post Meta -->
+                                <ul class="nav meta align-items-center">
+                                    <li class="meta-author">
+                                        <a>{{ mst_like.user_id.username }}</a>
+                                    </li>
+                                </ul>
+                                <!-- Post Desc -->
+                                <div class="desc">
+                                    <p>
+                                        {{ mst_like.content|truncatechars:100 }}...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    
+                </div>
+            </section>
+            <!--! End of Popular Post  -->
+
+            <!--! Most Commented Post -->
+            <section class="pt-40 pb-10 most-viewed">
+                <div class="section-title">
+                    <h2>Most Commented Post</h2>
+                </div>
+
+                <div class="post-blog-list">
+                    <div class="row">
+                        {% for cmt_post in comments_number_post %}
+                        <!-- Post 1 -->
+                        <div class="col-sm-6">
+                            <div class="post-default">
+                                <div class="post-thumb">
+                                    <a href="{% url 'specificpost' cmt_post.post_id %}"> <img src="{{ cmt_post.post_image.url }}" alt=""
+                                            class="img-fluid"> </a>
+                                </div>
+                                <div class="post-data">
+                                    <!-- Category -->
+                                    <div class="cats"><a>Created at: {{ cmt_post.created_at }}</a></div>
+                                    <!-- Title -->
+                                    <div class="title">
+                                        <h2>
+                                            <a href="{% url 'specificpost' cmt_post.post_id %}">{{ cmt_post.title }}</a>
+                                        </h2>
+                                    </div>
+                                    <!-- Post Desc -->
+                                    <div class="desc">
+                                        <p>
+                                            {{ cmt_post.content|truncatechars:100 }}...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    
+                    </div>
+                </div>
+            </section>
+            <!--! End of Most Commented Post -->
+
+
+            <!--! For custom add -->
+            <div class="pt-40 pb-40 biz-ad">
+                <a href="#"><img src="https://media.giphy.com/media/l41YouCUUcreUabHW/giphy.gif?cid=790b7611sgu2ndvljfjdmqd2ovr60g5uyzp98ijbvaavifnt&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="" class="img-fluid"></a>
+            </div>
+            <!--! For custom add end  -->
+
+        </div>
+        <div class="col-lg-4">
+            <div class="pt-88">
+                <div class="my-sidebar">
+
+                    <!--! Custom Ad Widget -->
+                    <div class="widget widget-ad">
+                        <!-- Widget Content -->
+                        <div class="widget-content">
+                            <a href="#">
+                                <img src="https://media.giphy.com/media/l41YouCUUcreUabHW/giphy.gif?cid=790b7611sgu2ndvljfjdmqd2ovr60g5uyzp98ijbvaavifnt&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                        <!-- End of Widget Content -->
+                    </div>
+                    <!--! End of Custom Ad Widget -->
+
+
+                    <!--! Recent Post -->
+                    <div class="widget widget-recent-post">
+                        <!-- Widget Title -->
+                        <h4 class="widget-title">
+                            Anonymous Post
+                        </h4>
+                        <!-- End of Widget Title -->
+                        <!-- Widget Content -->
+                        <div class="widget-content">
+                            <!-- Single Post -->
+                            {% for anoy_post in anoy_posts %}
+                            <div class="wrp-cover">
+                                <!-- Post Thumbnail -->
+                                <div class="post-thumb">
+                                    <a href="{% url 'anonymous_post_detail' anoy_post.post_id %}">
+                                        <img src="{{ anoy_post.image.url }}" alt="" class="img-fluid">
+                                    </a>
+                                </div>
+                                <!-- Post Title -->
+                                <div class="post-title">
+                                    <a href="{% url 'anonymous_post_detail' anoy_post.post_id %}">{{ anoy_post.title }}</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+                        <!-- End of Widget Content -->
+                    </div>
+                    <!--! End of Recent Post -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

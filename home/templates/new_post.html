@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Create Post</h1>
+<form method="post" action="{% url 'new' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+
+    {% if post_content %}
+    <h2>You had words in your post that violated our T&C, so our AI has created an alternate version of your blog:</h2>
+    <p>{{ post_content }}</p>
+    {% endif %}
+</form>
+{% endblock %}

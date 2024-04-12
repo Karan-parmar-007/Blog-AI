@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row categoary_card">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn-success"  type="submit">Generate</button>
+        </form>
+    </div>
+</div>
+
+
+{% if blog_content %}
+<div class="container">
+    <h2>your blog is ready :</h2>
+    <p> {{ blog_content }} </p>
+</div>
+{% endif %}
+
+
+
+{% endblock %}

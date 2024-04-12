@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Blog AI</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/jpg" href="{% static 'home/images/logo-2.jpg' %}" >
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500%7CSpectral:400,400i,500,600,700" rel="stylesheet">
+        <!--==== Bootstrap css file ====-->
+        <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+        <!--==== Font-Awesome css file ====-->
+        <link rel="stylesheet" href="{% static 'home/css/font-awesome.min.css' %}">
+        <!--==== Animate CSS ====-->
+        <link rel="stylesheet" href="{% static 'home/plugins/animate/animate.min.css' %}">
+        <!--==== Owl Carousel ====-->
+        <link rel="stylesheet" href="{% static 'home/plugins/owl-carousel/owl.carousel.min.css' %}">
+        <!--==== Magnific Popup ====-->
+        <link rel="stylesheet" href="{% static 'home/plugins/magnific-popup/magnific-popup.css' %}">
+        <!--==== Style css file ====-->
+        <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+
+        <!--==== Custom css file ====-->
+        <link rel="stylesheet" href="{% static 'home/css/custom.css' %}">
+    </head>
+
+<body>
+    <header class="header">
+        <div class="header-fixed">
+            <div class="container-fluid pl-120 pr-120 position-relative">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-3 col-md-4 col-6">
+                        <div class="logo">
+                            <a href="#"><img src="{% static 'home/images/logo_final.png' %}" alt="top logo" class="img-fluid"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-6 d-flex justify-content-end position-static">
+                        <div class="nav-menu-cover">
+                            <ul class="nav nav-menu">
+                                <li><a href="{% url 'mainhome' %}">Home</a></li>
+                                <li><a href="{% url 'create_anonymous_post' %}">Create Anonymous</a></li>
+
+
+
+
+
+                                <li class="menu-item-has-children">
+                                    <a href="#">Categories</a>
+                                    <ul class="sub-menu">
+                                       
+                                        {% for cat in categories %}
+                                        <li><a href="{% url 'particularcategory' cat.title %}">{{ cat.title }}</a></li>
+                                        {% endfor %}
+                                        <li><a href="{% url 'anonymous_post_list' %}">Anonymous</a></li>
+                                    </ul>
+                                </li>
+
+                                {% if user.is_authenticated %}
+
+                                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Blogs</a>
+
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'new' %}">Add a Blog</a></li>
+
+                                
+                                            <li><a href="{% url 'generate_blog' %}">Summary to Blog</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'logout' %}">Log out</a></li>
+                                {% else %}
+
+                                    <li><a href="{% url 'login_view' %}">Login</a></li>
+
+                                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+             
+                        <div class="mobile-menu-cover">
+                            <ul class="nav mobile-nav-menu">
+                                <li class="search-toggle-close hide">
+                                    <img src="{% static 'home/images/close.jpg' %}" alt="" class="img-fluid">
+                                </li>
+                                <li class="nav-menu-toggle">
+                                    <img src="{% static 'home/images/menu-toggler.jpg' %}" alt="" class="img-fluid svg">
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+      {% block body %}
+      {% endblock %}
+</body>
+
+<footer class="new_footer_area bg_color">
+    <div class="new_footer_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s"
+                        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInLeft;">
+                        <h3 class="f-title f_600 t_color f_size_18">Get in Touch</h3>
+                        <p>Don’t miss any updates of our platform !</p>
+                        <form action="#" class="f_subscribe_two mailchimp" method="post" novalidate="true"
+                            _lpchecked="1">
+                            <input type="text" name="EMAIL" class="form-control memail" placeholder="Email">
+                            <button class="btn btn_get btn_get_two" type="">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.4s"
+                        style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;">
+                        <h3 class="f-title f_600 t_color f_size_18">Categories</h3>
+                        <ul class="list-unstyled f_list">
+                            <li><a href="#">Education</a></li>
+                            <li><a href="#">Games</a></li>
+                            <li><a href="#">Sports</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.6s"
+                        style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;">
+                        <h3 class="f-title f_600 t_color f_size_18">Help</h3>
+                        <ul class="list-unstyled f_list">
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Term &amp; conditions</a></li>
+                            <li><a href="#">Support Policy</a></li>
+                            <li><a href="#">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="f_widget social-widget pl_70 wow fadeInLeft" data-wow-delay="0.8s"
+                        style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
+                        <h3 class="f-title f_600 t_color f_size_18">Team Solutions</h3>
+                        <div class="f_social_icon">
+                            <a href="#" class="fab"
+                                style="background-image: url(./assets/images/footer/instagram.avif);"></a>
+                            <a href="#" class="fab"
+                                style="background-image: url(./assets/images/footer/instagram.avif);"></a>
+                            <a href="#" class="fab"
+                                style="background-image: url(./assets/images/footer/instagram.avif);"></a>
+                                <a href="#" class="fab" style="background-image: url('{% static 'home/images/footer/instagram.avif' %}');"></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-sm-7">
+                    <p class="mb-0 f_400">© Copyright 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- Back to Top Button -->
+    <div class="back-to-top d-flex align-items-center justify-content-center">
+        <span><i class="fa fa-long-arrow-up"></i></span>
+    </div>
+    <!-- End of Back to Top Button -->
+<script src="{% static 'home/js/jquery-1.12.1.min.js' %}"></script>
+<script src="{% static 'home/js/bootstrap.bundle.min.js'%} "></script>
+<script src="{% static 'home/plugins/owl-carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'home/plugins/magnific-popup/jquery.magnific-popup.min.js'%}"></script>
+
+<script src="{% static 'home/js/scripts.js'%}"></script>
+<script src="{% static 'home/js/custom.js'%}"></script>
+</html>

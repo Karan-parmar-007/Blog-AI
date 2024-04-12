@@ -1,0 +1,38 @@
+License 
+
+Whisper Ai (only currently known) Project License Agreement
+
+This License Agreement ("Agreement") is entered into on [12-04-2024] between Karan Parmar ("Licensor") and Anyone who is provided by the project ("Licensee").
+
+1. Grant of License:
+   Licensor hereby grants Licensee a non-exclusive, non-transferable license to use the software project titled "Whisper AI" ("the Project") solely for Licensee's personal use and internal business purposes, subject to the terms and conditions herein.
+
+2. Restrictions:
+   Licensee agrees not to:
+   a. Modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Project.
+   b. Distribute, sublicense, sell, rent, lease, or otherwise transfer the Project or any rights therein to any third party.
+   c. Remove or alter any copyright, trademark, or other proprietary notices contained in or on the Project.
+
+3. Ownership:
+   Licensee acknowledges and agrees that Licensor retains all right, title, and interest in and to the Project, including all intellectual property rights therein. This Agreement does not grant Licensee any ownership rights to the Project.
+
+4. Confidentiality:
+   Licensee agrees to treat the Project and any related documentation or information as confidential and to take all reasonable precautions to protect such information from unauthorized disclosure or use.
+
+5. Termination:
+   This Agreement shall remain in effect until terminated. Licensor may terminate this Agreement immediately upon written notice if Licensee breaches any provision of this Agreement. Upon termination, Licensee shall immediately cease all use of the Project and destroy all copies thereof in its possession or control.
+
+6. Governing Law:
+   This Agreement shall be governed by and construed in accordance with the laws of Karan Parmar.
+
+7. Entire Agreement:
+   This Agreement constitutes the entire agreement between the parties concerning the subject matter hereof and supersedes all prior and contemporaneous agreements and understandings, whether written or oral.
+
+8. Used technologies:
+There are codes that are available online for reference and as well as opensource framework. They are : Bootstrap, LLM model (used Llama 2 7b-chat from hugging-face by TheBloke), Envato (used paid version).
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the date first above written.
+
+Karan Parmar (Licensor)
+
+Anyone who finds the project (Licensee)

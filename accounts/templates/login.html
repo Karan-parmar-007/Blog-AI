@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container main_login_col">
+    <div class="row ">
+
+      <div class="col ">
+        <div class="login_form_container">
+            <div class="login_form">
+                <h4>Login</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form_item">
+                        <label for="">Email</label><br>
+                        {{ form.username }}
+                    </div>
+                    <div class="form_item">
+                        <label for="">Password</label><br>
+                        {{ form.password }}
+                    </div>
+                    <button class="btn btn-success" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="login_form_container">
+            <div class="login_form_signup">
+                <h4>Haven't Signup ?</h4>
+                <p>Click The button below and signup in just few steps</p>
+                <a type="button" class="btn btn-success" href="{% url 'signup' %}">Sign Up</a>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+ 
+
+
+
+
+
+{% endblock %}

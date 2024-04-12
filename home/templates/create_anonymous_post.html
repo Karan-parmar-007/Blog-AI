@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>Create Anonymous Post</h1>
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- Display the CAPTCHA value here -->
+        <label for="captcha">CAPTCHA:</label>
+        <input type="text" id="captcha" name="captcha" value="{{ captcha_text }}" readonly>
+        <!-- End of CAPTCHA display -->
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
+
+
+
+

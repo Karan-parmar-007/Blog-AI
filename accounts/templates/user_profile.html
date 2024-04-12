@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+        <div class="main-content relative pt-80 pb-80">
+            <div class="container">
+    
+                <section class="about-sec mb-30 profile-card">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-5 col-xs-12">
+                                        <div class="profile-img-center">
+                                            <img src="{{ user.img.url }}" alt="profile" class="candidate-img">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-xs-12">
+                                        <div>
+                                            <h1 class="profile-user">{{ user.username }}</h1>
+                                        </div>
+                                        <ul class="profile-wrap mt-5">
+                                            <li>
+                                                <div class="profile-title">Email</div>
+                                                <div class="profile-desc">
+                                                    {{user.email}}
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="profile-title">Phone</div>
+                                                <div class="profile-desc">
+                                                    {{user.phone_number}}
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="profile-title">Comments Done</div>
+                                                <div class="profile-desc">
+                                                    10
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="profile-title">No of Post Created</div>
+                                                <div class="profile-desc">24</div>
+                                            </li>
+                                        </ul>
+                                        <div class="mt-4 profile-buttons">
+                                            <button class="btn btn-warning" style="border-radius: 8px;"><a href="{% url 'userupdate' %}">Edit Profile</a></button>
+    
+                                            <button class="btn btn-success" style="border-radius: 8px;"><a href="{% url 'new' %}">Create Post</a></button>
+    
+                                            <button class="btn btn-info" style="border-radius: 8px;"><a href="{% url 'userpost' %}">User Post</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <!-- Page title start -->
+    <div class="page-title">
+        <div class="container">
+            <h2>Blog</h2>
+            <ul class="nav">
+                <li><a>Home</a></li>
+                <li><a>Blogs</a></li>
+                <li>Blog Details</li>
+            </ul>
+        </div>
+    </div>
+    <!-- End of Page title -->
+
+    <div class="container pt-120 pb-120">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="post-details-cover post-has-video-thumb">
+
+                    <!-- Post Thumbnail -->
+                    <div class="post-thumb-cover">
+                        <div class="post-meta-info">
+                            <!-- Post Title -->
+                            <div class="title">
+                                <h2>{{ post.title }}</h2>
+                            </div>
+
+                            <!-- Post Info -->
+                            <ul class="nav meta align-items-center">
+                                <li class="meta-author">
+                                    <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
+                                    <a style="cursor: default;">{{ post.user_id.username }}</a>
+                                </li>
+                                <li class="meta-date" style="cursor: default;"><a>{{ post.created_at }}</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Post Thumbnail Image -->
+                        <div class="post-thumb">
+                            <div class="vid-post-thumb-ol"></div>
+                            <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <!-- End of Post Thumbnail -->
+
+                    <!-- Post Content -->
+                    <div class="post-content-cover my-drop-cap">
+                        {% if translated_contentt %}
+                            <h3>Original Content:</h3>
+                            <p>{{ post.content }}</p>                                    
+                            <h3>Translated Content:</h3>
+                            <p>{{ translated_contentt }}</p>
+                        {% else %}
+                            <p>{{ post.content }}</p>
+                        {% endif %}
+                    </div>
+                    <!-- End of Post Content -->
+
+                    <!-- Like/Unlike Button -->
+                    <div>
+                        {% if request.user.is_authenticated %}
+                            {% if is_liked %}
+                                <form action="{% url 'like_post' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ post.pk }}">
+                                    <button type="submit" class="btn btn-danger post-like-button">Unlike</button>
+                                </form>
+                            {% else %}
+                                <form action="{% url 'like_post' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ post.pk }}">
+                                    <button type="submit" class="btn btn-primary">Like</button>
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            <p><a href="{% url 'login' %}">Login</a> to like this post.</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Tags and Buttons -->
+                    <div class="post-all-tags-translate">
+                        <a href="#">{{ post.cat.title }}</a>
+
+                        <!-- Translate Form -->
+                        <form class="translate-form" method="post" action="{% url 'translate_post' post_id=post.pk %}">
+                            {% csrf_token %}
+                            <label for="id_target_language">Translate to:</label>
+                            <input type="text" id="id_target_language" name="target_language" placeholder="Enter target language code">
+                            <button type="submit" class="btn-sm btn-danger btn-visible" style="border-radius: 8px;">Translate</button>
+                        </form>
+
+                        <!-- Generate Summary Form -->
+                        <form action="{% url 'generate_summary' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_content" value="{{ post.content }}">    
+                            <button type="submit" class="btn-sm btn-success btn-visible" style="border-radius: 8px;">Generate Summary</button>
+                        </form> 
+
+                        <!-- Generate Script Form -->
+                        <form action="{% url 'generate_script' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_content" value="{{ post.content }}">
+                            <button type="submit" class="btn-sm btn-info btn-visible" style="border-radius: 8px;">Generate Video Script</button>
+                        </form>    
+                    </div>
+
+                    <!-- Read Out Loud Button -->
+                    <div class="container text-center">
+                        <form method="POST" action="{% url 'call' %}" >
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ post.content }}" name="text">
+                            <button id="read-out-loud-btn" type="submit">Read Out Loud</button>
+                        </form>
+                    </div>
+
+                    <!-- Include an audio player to play the generated audio -->
+                    <audio controls id="audio-player" style="display: none;">
+                        <source id="audio-source" src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+
+                    <!-- Comments -->
+                    <button class="btn btn-comment" type="button" data-toggle="collapse" data-target="#commentToggle"
+                        aria-expanded="false" aria-controls="commentToggle">
+                        Hide Comments
+                    </button>
+
+                    <div class="collapse show" id="commentToggle">
+                        <ul class="post-all-comments" style="border-radius: 16px;">
+                            {% if comments %}
+                                {% for comment in comments %}
+                                    <li class="single-comment-wrapper">
+                                        <!-- Single Comment -->
+                                        <mark class="single-post-comment px-4 py-3" style="border-radius: 16px;">
+                                            <!-- Author Image -->
+                                            <!-- Comment Content -->
+                                            <div class="comment-content">
+                                                <div class="comment-author-name">
+                                                    <h6>{{ comment.user_id.username }}</h6> <span> {{ comment.created_at }} </span>
+                                                </div>
+                                                <p>{{ comment.content }}</p>
+                                            </div>
+                                        </mark>
+                                        <!-- End of Single Comment -->
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li>No comments yet.</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- End of Comments -->
+
+                    <!-- Comment Form -->
+                    <div class="post-comment-form-cover">
+                        <h3>Write your comment</h3>
+                        <form method="post" action="{% url 'add_comment' post_id=post.pk %}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Add Comment</button>
+                        </form>
+                    </div>
+                    <!-- End of Comment Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom CSS to make buttons always visible -->
+    <style>
+        .btn-visible {
+            display: inline-block;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    </style>
+{% endblock %}

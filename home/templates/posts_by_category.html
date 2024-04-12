@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+
+    <div class="container">
+        <div class="row categoary_card">
+        {% for onepost in posts %}
+        <div class="col-md-3 categoary_card">
+            <div class="card" >
+                <img src="{{ onepost.post_image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ onepost.title }}</h5>
+                    <p class="card-text">{{ onepost.content|truncatechars:100 }}...</p>
+                    <p class="card-text">{{ onepost.user_id.username }}</p>
+                    <p class="card-text">{{ onepost.created_at }}</p>
+                    <a href="{% url 'specificpost' onepost.post_id %}" class="btn btn-dark">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+  
+
+    <div class="container text-center">
+        <form action="" method="GET" class="search_dammm">
+            {% csrf_token %}
+            <input type="search" name="title">
+            <button type="submit">Search what you want</button>
+        </form>
+    </div>
+    
+
+<div class="container text-center categoary_card">
+    {% if posts.has_previous %}
+    <a type="button" class="btn btn-secondary" href="?page=1">First</a>
+    <a type="button" class="btn btn-secondary" href="?page={{ posts.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    Page: {{ posts.number }} of {{ posts.paginator.num_pages }}
+
+    {% if posts.has_next %}
+    <a type="button" class="btn btn-secondary" href="?page={{ posts.next_page_number }}">Next</a>
+    <a type="button" class="btn btn-secondary" href="?page={{ posts.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>
+{% endblock %}

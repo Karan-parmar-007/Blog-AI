@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+
+
+
+
+<div class="container main_login_col">
+    <div class="row ">
+
+      <div class="col ">
+        <div class="login_form_container">
+            <div class="login_form">
+                <h4>Sign Up</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-success" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="login_form_container">
+            <div class="login_form_signup">
+                <h4>Already have a Account ?</h4>
+                <p>Click The button below and login in just one steps</p>
+                <a type="button" class="btn btn-success" href="{% url 'login_view' %}">Login</a>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
