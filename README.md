@@ -1,6 +1,6 @@
-# Whisper AI - Blogging Platform
+# Blog AI - Blogging Platform
 
-Whisper AI is an innovative blogging platform that combines advanced artificial intelligence and cloud technologies to revolutionize the way users create, share, and engage with content. With a range of features designed to enhance the blogging experience, Whisper AI empowers users to express themselves freely while ensuring privacy and security.
+Blog AI is an innovative blogging platform that combines advanced artificial intelligence and cloud technologies to revolutionize the way users create, share, and engage with content. With a range of features designed to enhance the blogging experience, Blog AI empowers users to express themselves freely while ensuring privacy and security.
 
 ## Features
 
@@ -15,7 +15,7 @@ Whisper AI is an innovative blogging platform that combines advanced artificial 
 
 ## Anonymous Blogging
 
-To promote freedom of speech, Whisper AI offers an anonymous blogging option. Users can post blogs without their data being stored, and content is verified by administrators before appearing on the platform.
+To promote freedom of speech, Blog AI offers an anonymous blogging option. Users can post blogs without their data being stored, and content is verified by administrators before appearing on the platform.
 
 ## Technologies Used
 
@@ -51,8 +51,8 @@ To promote freedom of speech, Whisper AI offers an anonymous blogging option. Us
 
 ## License
 
-This project is not open source. Please refer to the [license.txt](license.txt) for more information. Feel free to run and explore the functionality of Whisper AI on your system.
+This project is open source. Please refer to the [license.txt](license.txt) for more information. Feel free to run and explore the functionality of Blog AI on your system.
 
 ---
 
-With Whisper AI, blogging has never been easier or more engaging. Join our community and unleash your creativity today!
+With Blog AI, blogging has never been easier or more engaging. Join our community and unleash your creativity today!
